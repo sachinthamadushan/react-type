@@ -1,8 +1,11 @@
-const Dashboard = () => {
-    return (
-        <h1 className="text-2xl p-6">Dashboard</h1>
-    );
-}
 
+const Dashboard = () => {
+    
+  return (
+    <>
+      <h1 className="text-3xl font-bold">Dashboard</h1>
+    </>
+  );
+};
 
 export default Dashboard;
