@@ -1,4 +1,5 @@
 import { NavLink } from "react-router-dom";
+import { FaCashRegister, FaBoxOpen, FaChartBar, FaWarehouse } from "react-icons/fa";
 export const Sidebar = () => {
 
     const navLinkClasses = ({isActive}:{isActive:boolean}) =>{
@@ -15,21 +16,25 @@ export const Sidebar = () => {
                 <ul>
                     <li>
                         <NavLink to="/" className={navLinkClasses}>
+                        <FaCashRegister className="mr-2"/>
                         Dashboard</NavLink>
                     </li>
                     <li>
                         <NavLink to="/product" 
                         className={navLinkClasses}>
+                        <FaBoxOpen className="mr-2"/>
                         Product</NavLink>
                     </li>
                     <li>
                         <NavLink to="/sales" 
                         className={navLinkClasses}>
+                        <FaChartBar className="mr-2"/>
                         Sales</NavLink>
                     </li>
                     <li>
                         <NavLink to="/settings" 
                         className={navLinkClasses}>
+                        <FaWarehouse className="mr-2"/>
                         Settings</NavLink>
                     </li>
                 </ul>
