@@ -1,4 +1,4 @@
-const NavBar = () => {
+export const NavBar = () => {
   return (
     <nav className="bg-blue-500 p-4 text-white">
       <div className="flex">
@@ -19,4 +19,3 @@ const NavBar = () => {
   );
 };
 
-export default NavBar;
