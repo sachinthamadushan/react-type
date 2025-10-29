@@ -8,6 +8,10 @@ export const AddProductForm = () => {
 
     const handleSubmit = async (e:React.FormEvent) => {
         e.preventDefault();
+        if(name === '' || price === 0){
+            alert('Please fill in all fields');
+            return;
+        }
         try{
             await addDoc(collection(db,'products'),{
                 name:name,
