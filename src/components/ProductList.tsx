@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import type { Product } from "../types/products";
-import { collection, query, onSnapshot } from "firebase/firestore";
+import { collection, query, onSnapshot , deleteDoc, doc} from "firebase/firestore";
 import { db } from "../firebase";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import { EditProductModal } from "./EditProductModal";
@@ -36,6 +36,17 @@ export const ProductList = () => {
     setIsModalOpen(false);
   }
 
+  const deleteProduct = async(id:string) => {
+    if(window.confirm('Are you want to delete this product?')){
+      try {
+        await deleteDoc(doc(db,'products',id));
+        alert('Product deleted !')
+      } catch (error) {
+        alert("Product delete faild!");
+      }
+    }
+  }
+
   return (
     <div className="bg-white rounded-lg shadow-md p-4 mx-6 my-6">
       <h1 className="text-xl font-semibold mb-4">Product List</h1>
@@ -65,7 +76,7 @@ export const ProductList = () => {
                   <button
                     className="bg-red-500 
                 px-2 py-2 text-white rounded hover:bg-red-600"
-                  >
+                  onClick={() => {deleteProduct(product.id)}} >
                     <FaTrash />
                   </button>
                 </td>
