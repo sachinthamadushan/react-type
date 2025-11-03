@@ -3,10 +3,13 @@ import type { Product } from "../types/products";
 import { collection, query, onSnapshot } from "firebase/firestore";
 import { db } from "../firebase";
 import { FaEdit, FaTrash } from "react-icons/fa";
+import { EditProductModal } from "./EditProductModal";
 
 export const ProductList = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
+  
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     const q = query(collection(db, "products"));
@@ -22,6 +25,10 @@ export const ProductList = () => {
       setLoading(false);
     });
   }, []);
+
+  const openEditModal = () => {
+    setIsModalOpen(true);
+  }
 
   return (
     <div className="bg-white rounded-lg shadow-md p-4 mx-6 my-6">
@@ -46,7 +53,7 @@ export const ProductList = () => {
                   <button
                     className="bg-yellow-500 
                 px-2 py-2 text-white rounded hover:bg-amber-600 me-3"
-                  >
+                onClick={openEditModal}>
                     <FaEdit />
                   </button>
                   <button
@@ -61,6 +68,8 @@ export const ProductList = () => {
           )}
         </tbody>
       </table>
+
+      <EditProductModal isOpen={isModalOpen}/>
     </div>
   );
 };
