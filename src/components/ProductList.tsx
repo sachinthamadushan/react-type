@@ -10,6 +10,7 @@ export const ProductList = () => {
   const [loading, setLoading] = useState(true);
   
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [editProduct, setEditProduct] = useState<Product | null>(null);
 
   useEffect(() => {
     const q = query(collection(db, "products"));
@@ -26,8 +27,13 @@ export const ProductList = () => {
     });
   }, []);
 
-  const openEditModal = () => {
+  const openEditModal = (product:Product) => {
     setIsModalOpen(true);
+    setEditProduct(product);
+  }
+
+  const closeEditModal = () => {
+    setIsModalOpen(false);
   }
 
   return (
@@ -53,7 +59,7 @@ export const ProductList = () => {
                   <button
                     className="bg-yellow-500 
                 px-2 py-2 text-white rounded hover:bg-amber-600 me-3"
-                onClick={openEditModal}>
+                onClick={() => {openEditModal(product)}}>
                     <FaEdit />
                   </button>
                   <button
@@ -69,7 +75,8 @@ export const ProductList = () => {
         </tbody>
       </table>
 
-      <EditProductModal isOpen={isModalOpen}/>
+      <EditProductModal isOpen={isModalOpen} onClose={closeEditModal}
+       product={editProduct}/>
     </div>
   );
 };
